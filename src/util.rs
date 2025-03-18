@@ -39,6 +39,9 @@ impl FxUtil {
     /// for the given date.
     ///
     /// Only makes an API call if the rate is not already cached.
+    ///
+    /// Sign is preserved (i.e. a negative input will result in a negative
+    /// output).
     pub async fn convert(
         &self,
         date: NaiveDate,
