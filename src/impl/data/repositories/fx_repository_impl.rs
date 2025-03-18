@@ -7,7 +7,7 @@ use iso_currency::Currency;
 
 use crate::{
     data::datasources::{
-        cache_datasource::{self, CacheDatasource, CacheDatasourceImpl},
+        cache_datasource::{CacheDatasource, CacheDatasourceImpl},
         open_exchange_rates_datasource::{
             OpenExchangeRatesDatasource, OpenExchangeRatesDatasourceImpl,
         },

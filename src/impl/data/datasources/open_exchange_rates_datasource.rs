@@ -9,6 +9,7 @@ use crate::{
 };
 
 #[async_trait]
+#[allow(dead_code)]
 pub(crate) trait OpenExchangeRatesDatasource: Send + Sync {
     /// Get the latest exchange rates available.
     /// https://docs.openexchangerates.org/reference/latest-json
