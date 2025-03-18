@@ -42,6 +42,9 @@ impl CacheDatasource for CacheDatasourceImpl {
         let file_path = self.cache_dir.join(date.format("%Y-%m-%d").to_string());
         let rate_table = serde_json::to_string(rate_table)
             .map_err(|e| CacheSerializationError::with_debug(&file_path.to_string_lossy(), &e))?;
+        tokio::fs::create_dir_all(&self.cache_dir)
+            .await
+            .map_err(|e| CacheIoError::with_debug(&self.cache_dir.to_string_lossy(), &e))?;
         tokio::fs::write(&file_path, rate_table)
             .await
             .map_err(|e| CacheIoError::with_debug(&file_path.to_string_lossy(), &e))?;
