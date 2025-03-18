@@ -1,14 +1,8 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+mod r#impl;
+pub(crate) use r#impl::data;
+pub(crate) use r#impl::domain;
+pub use r#impl::exports::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub mod errors;
+pub mod secrets;
+pub mod util;
