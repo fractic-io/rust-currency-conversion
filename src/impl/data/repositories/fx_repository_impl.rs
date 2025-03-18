@@ -72,15 +72,15 @@ where
 }
 
 impl FxRepositoryImpl {
-    pub(crate) async fn using_open_exchange_rates_api(
+    pub(crate) fn using_open_exchange_rates_api(
         app_id: impl Into<String>,
         cache_dir: impl Into<PathBuf>,
     ) -> Result<Self, ServerError> {
         Ok(Self {
-            cache_datasource: CacheDatasourceImpl::new(cache_dir).await?,
-            api_datasource: ApiDatasource::OpenExchangeRates(
-                OpenExchangeRatesDatasourceImpl::new(app_id).await?,
-            ),
+            cache_datasource: CacheDatasourceImpl::new(cache_dir)?,
+            api_datasource: ApiDatasource::OpenExchangeRates(OpenExchangeRatesDatasourceImpl::new(
+                app_id,
+            )?),
         })
     }
 }

@@ -42,7 +42,7 @@ impl OpenExchangeRatesDatasource for OpenExchangeRatesDatasourceImpl {
 }
 
 impl OpenExchangeRatesDatasourceImpl {
-    pub(crate) async fn new(app_id: impl Into<String>) -> Result<Self, ServerError> {
+    pub(crate) fn new(app_id: impl Into<String>) -> Result<Self, ServerError> {
         Ok(Self {
             app_id: app_id.into(),
         })

@@ -50,7 +50,7 @@ impl CacheDatasource for CacheDatasourceImpl {
 }
 
 impl CacheDatasourceImpl {
-    pub(crate) async fn new(cache_dir: impl Into<PathBuf>) -> Result<Self, ServerError> {
+    pub(crate) fn new(cache_dir: impl Into<PathBuf>) -> Result<Self, ServerError> {
         Ok(Self {
             cache_dir: cache_dir.into(),
         })

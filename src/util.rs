@@ -53,17 +53,16 @@ impl FxUtil {
 }
 
 impl FxUtil {
-    pub async fn using_open_exchange_rates_api(
+    pub fn using_open_exchange_rates_api(
         app_id: impl Into<String>,
         cache_dir: impl Into<PathBuf>,
     ) -> Result<Self, ServerError> {
         Ok(Self {
-            fx_repository: FxRepositoryImpl::using_open_exchange_rates_api(app_id, cache_dir)
-                .await?,
+            fx_repository: FxRepositoryImpl::using_open_exchange_rates_api(app_id, cache_dir)?,
         })
     }
 
-    pub async fn using_open_exchange_rates_api_from_secrets(
+    pub fn using_open_exchange_rates_api_from_secrets(
         secrets: SecretValues<OpenExchangeRatesApiSecretsConfig>,
         cache_dir: impl Into<PathBuf>,
     ) -> Result<Self, ServerError> {
@@ -71,8 +70,7 @@ impl FxUtil {
             fx_repository: FxRepositoryImpl::using_open_exchange_rates_api(
                 secrets.get(&OpenExchangeRatesApiSecretsConfig::OpenExchangeRatesAppId)?,
                 cache_dir,
-            )
-            .await?,
+            )?,
         })
     }
 }
