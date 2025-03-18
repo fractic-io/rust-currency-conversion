@@ -15,7 +15,7 @@ pub(crate) trait CacheDatasource: Send + Sync {
     async fn get(&self, date: NaiveDate) -> Result<Option<RateTable>, ServerError>;
 
     /// Set rate table for given date.
-    async fn set(&self, date: NaiveDate, rate_table: RateTable) -> Result<(), ServerError>;
+    async fn set(&self, date: NaiveDate, rate_table: &RateTable) -> Result<(), ServerError>;
 }
 
 pub(crate) struct CacheDatasourceImpl {
@@ -38,9 +38,9 @@ impl CacheDatasource for CacheDatasourceImpl {
         }
     }
 
-    async fn set(&self, date: NaiveDate, rate_table: RateTable) -> Result<(), ServerError> {
+    async fn set(&self, date: NaiveDate, rate_table: &RateTable) -> Result<(), ServerError> {
         let file_path = self.cache_dir.join(date.format("%Y-%m-%d").to_string());
-        let rate_table = serde_json::to_string(&rate_table)
+        let rate_table = serde_json::to_string(rate_table)
             .map_err(|e| CacheSerializationError::with_debug(&file_path.to_string_lossy(), &e))?;
         tokio::fs::write(&file_path, rate_table)
             .await
