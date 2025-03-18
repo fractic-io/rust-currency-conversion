@@ -13,7 +13,10 @@ pub(crate) struct OpenExchangeRatesModel {
     #[serde(with = "ts_seconds")]
     pub(crate) timestamp: DateTime<Utc>,
     pub(crate) base: Currency,
-    pub(crate) rates: HashMap<Currency, f64>,
+
+    // Rates may contain unknown currencies, so parse currencies as strings to
+    // be safe.
+    pub(crate) rates: HashMap<String, f64>,
 }
 
 // --
@@ -22,7 +25,14 @@ impl Into<RateTable> for OpenExchangeRatesModel {
     fn into(self) -> RateTable {
         RateTable {
             date: self.timestamp.date_naive(),
-            rates: self.rates,
+            rates: self
+                .rates
+                .into_iter()
+                // Ignore unrecognized currencies.
+                .filter_map(|(currency, rate)| {
+                    Currency::from_code(&currency).map(|currency| (currency, rate))
+                })
+                .collect(),
         }
     }
 }
