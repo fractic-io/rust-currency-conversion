@@ -1,14 +1,13 @@
 use std::path::PathBuf;
 
 use chrono::NaiveDate;
-use fractic_env_config::SecretValues;
 use fractic_server_error::ServerError;
 use iso_currency::Currency;
 
 use crate::{
     data::repositories::fx_repository_impl::FxRepositoryImpl,
     domain::repositories::fx_repository::FxRepository, errors::InvalidIsoCurrency,
-    secrets::OpenExchangeRatesApiSecretsConfig,
+    CurrencyConversionCtxView,
 };
 
 pub struct FxUtil {
@@ -66,12 +65,12 @@ impl FxUtil {
     }
 
     pub fn using_open_exchange_rates_api_from_secrets(
-        secrets: SecretValues<OpenExchangeRatesApiSecretsConfig>,
+        ctx: &impl CurrencyConversionCtxView,
         cache_dir: impl Into<PathBuf>,
     ) -> Result<Self, ServerError> {
         Ok(Self {
             fx_repository: FxRepositoryImpl::using_open_exchange_rates_api(
-                secrets.get(&OpenExchangeRatesApiSecretsConfig::OpenExchangeRatesAppId)?,
+                ctx.open_exchange_rates_app_id(),
                 cache_dir,
             )?,
         })

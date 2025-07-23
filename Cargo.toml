@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+fractic-context = { git = "https://github.com/fractic-io/rust-context.git" }
 fractic-core = { git = "https://github.com/fractic-io/rust-core.git" }
-fractic-env-config = { git = "https://github.com/fractic-io/rust-env-config.git" }
 fractic-server-error = { git = "https://github.com/fractic-io/rust-server-error.git" }
 chrono = { version = "^0.4.40", features = ["serde"] }
 serde = "^1.0.218"
