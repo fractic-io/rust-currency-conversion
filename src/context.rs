@@ -6,6 +6,6 @@ define_ctx_view!(
     secrets {
         OPEN_EXCHANGE_RATES_APP_ID: String,
     },
-    deps { },
-    req_impl { }
+    deps_overlay {},
+    req_impl {}
 );
