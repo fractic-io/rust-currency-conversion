@@ -13,4 +13,3 @@ today, provider-agnostic by design): `CurrencyConversionUtil` over an
   (trait + Impl) with its `data/models/<provider>_model.rs`, wired in
   `fx_repository_impl.rs`; the domain and `util.rs` stay unchanged. Only
   domain types leave the crate, through `impl/exports`.
-- Commit / PR titles: imperative, trailing period.
