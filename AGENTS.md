@@ -3,8 +3,8 @@
 Currency conversion and historical exchange rates (openexchangerates.org
 today, provider-agnostic by design): `CurrencyConversionUtil` over an
 `FxRepository` with cached and HTTP datasources, `RateTable` entity,
-`CurrencyConversionCtxView`. Library layout per `/efs/fractic/_/rust.md`
-§2: `src/impl/mod.rs` gates `impl/domain/{entities,repositories}` and
+`CurrencyConversionCtxView`. Library layout: `src/impl/mod.rs` gates
+`impl/domain/{entities,repositories}` and
 `impl/data/{datasources,models,repositories}` (all `pub(crate)`),
 `impl/exports` is what consumers see, plus `context.rs`, `errors.rs`,
 `util.rs` (the public façade).
