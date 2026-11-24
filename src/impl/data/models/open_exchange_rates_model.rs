@@ -21,11 +21,11 @@ pub(crate) struct OpenExchangeRatesModel {
 
 // --
 
-impl Into<RateTable> for OpenExchangeRatesModel {
-    fn into(self) -> RateTable {
+impl From<OpenExchangeRatesModel> for RateTable {
+    fn from(val: OpenExchangeRatesModel) -> Self {
         RateTable {
-            date: self.timestamp.date_naive(),
-            rates: self
+            date: val.timestamp.date_naive(),
+            rates: val
                 .rates
                 .into_iter()
                 // Ignore unrecognized currencies.

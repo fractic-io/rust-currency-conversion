@@ -66,10 +66,7 @@ impl OpenExchangeRatesDatasourceImpl {
         if !response.status().is_success() {
             return Err(OpenExchangeRatesApiError::with_debug(
                 function_name,
-                &format!(
-                    "callout returned with {} status code",
-                    response.status().to_string(),
-                ),
+                &format!("callout returned with {} status code", response.status()),
                 &response.text().await.unwrap_or_default(),
             ));
         }
